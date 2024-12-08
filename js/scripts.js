@@ -1,26 +1,4 @@
-/* ----------------------------
 
-	Project:	Symphonius
-	Version:	1.1.0
-	Author:     Nika Vasilyeva
-	Website:    http://themeforest.net/user/the-nika/
-
--------------------------------
-
-	Table of Contents:
-
-	01. Preloader
-	02. Add Class on Touch Devices
-	03. Top Panel Show/Hide
-	04. Navigation Scrollspy
-	05. Hide Offcanvas Navigation by Click to Link
-	06. Intro Title Modification
-	07. Audio Player
-	08. Video Player
-	09. Video and News Slider Controls Stick to Window Width
-	10. Form Validation
-
----------------------------- */
 
 'use strict';
 
