@@ -1344,11 +1344,6 @@ p {
     src: url(LightningBlaze.ttf);
 }
 
-.title-img {
-    margin-top: -15px;
-    margin-left: -30px;
-}
-
 @media (max-width: 959px) {
   .intro__title {
     max-width: 670px;
