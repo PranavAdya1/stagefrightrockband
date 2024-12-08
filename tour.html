@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+
+    <!-- .......... Title .......... -->
+    <title>Stage Fright | Rock Band</title>
+    <!-- .......... End Title .......... -->
+
+    <!-- .......... Fonts and Extras .......... -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7cOverpass+Mono:700&display=swap">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <!-- .......... End Fonts and Extras .......... -->
+
+    <!-- .......... Styles .......... -->
+    <link rel="stylesheet" href="css/uikit.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- .......... End Styles .......... -->
+
+    <!-- .......... Favicons .......... -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#080618">
+    <link rel="shortcut icon" href="img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- .......... End Favicons .......... -->
+
+</head>
+
+<body class="loading">
+
+    <!-- .......... Preloader .......... -->
+    <div class="js-preloader preloader"></div>
+    <!-- .......... End Preloader .......... -->
+
+    <!-- .......... Fixed Top Panel Start .......... -->
+    <header class="panel js-panel">
+        <div class="container--panel uk-container uk-height-1-1">
+            <div class="uk-flex uk-flex-middle uk-height-1-1" data-uk-grid>
+                <div class="uk-width-1-3 uk-width-1-6@m">
+                    <div class="logo logo--panel uk-visible@m">
+                        <a href="#intro" data-uk-scroll>
+                            <!-- .......... Logo .......... -->
+                            <img src="img/logo.png" alt="">
+                            <!-- .......... End Logo .......... -->
+                        </a>
+                    </div>
+                    <div class="logo logo--panel uk-hidden@m">
+                        <a href="#intro" data-uk-scroll>
+                            <!-- .......... Mobile Version Logo .......... -->
+                            <img src="img/logo_small.svg" alt="">
+                            <!-- .......... End Mobile Version Logo .......... -->
+                        </a>
+                    </div>
+                </div>
+                <div class="uk-width-2-3 uk-visible@m">
+                    <!-- .......... Navigation .......... -->
+                    <ul class="nav nav--panel js-scrollspy-nav uk-flex uk-flex-wrap">
+                        <li><a href="index.html">Home</a></li>
+                    </ul>
+                    <!-- .......... End Navigation .......... -->
+                </div>
+                <div class="uk-width-1-3 uk-width-1-6@m">
+                    <!-- .......... Player Controls .......... -->
+                    <div class="panel__player">
+                        <audio class="js-audio" preload="metadata"></audio>
+                        <button type="button" class="icon icon--play-pause icon--play js-panel-play"></button>
+                        <a class="mejs__horizontal-volume-slider js-panel-volume">
+                            <div class="mejs__horizontal-volume-total">
+                                <div class="mejs__horizontal-volume-current"></div>
+                            </div>
+                        </a>
+                    </div>                    
+                    <!-- .......... End Player Controls .......... -->
+                </div>
+                <div class="uk-width-1-3 uk-hidden@m uk-text-right">
+                    <!-- .......... Navigation Toggle .......... -->
+                    <a href="#" data-uk-toggle="target: #offcanvas-nav">Menu</a>
+                    <!-- .......... End Navigation Toggle .......... -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- .......... End Fixed Top Panel .......... -->
+    <div id="offcanvas-nav" data-uk-offcanvas="flip: true; mode: push; overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="modal__close uk-offcanvas-close" type="button" data-uk-close></button>
+            <!-- .......... Navigation .......... -->
+            <ul class="nav nav--offcanvas js-scrollspy-nav js-offcanvas-nav uk-flex">
+                <li><a href="index.html">Home</a></li>
+            </ul>
+            <!-- .......... End Navigation .......... -->
+        </div>
+    </div>
+
+    <!-- .......... Intro Section Start .......... -->
+    <section class="intro uk-margin-large-bottom">
+        <div class="uk-container uk-container-large">
+            <div class="uk-grid-collapse" data-uk-grid>
+                <div class="intro__sidebar uk-width-1-4@m uk-visible@m uk-position-relative">
+                    <div class="logo logo--intro">
+                        <!-- .......... Logo .......... -->
+                        <img src="img/logo.png" alt="">
+                        <!-- .......... End Logo .......... -->
+                    </div>
+                    <!-- .......... Navigation .......... -->
+                    <ul class="nav nav--intro uk-list js-scrollspy-nav">
+                        <li><a href="index.html">Home</a></li>                       
+                    </ul>
+                    <!-- .......... End Navigation .......... -->
+                </div>
+                <div class="uk-width-3-4@m">
+                    <div class="slider slider--intro uk-position-relative" data-uk-slideshow="animation: push">
+                        <!-- .......... Slider .......... -->
+                        <ul class="slider__items uk-slideshow-items">
+                            <li>
+                                <div class="slider__screen">
+                                    <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center">
+                                        <img class="slider__image" src="img/slider/01.jpg" alt="" data-uk-cover>
+                                    </div>
+                                    <div class="slider__inner uk-position-top">
+                                        <div data-uk-slideshow-parallax="scale: 1,1,0.8">
+                                            <img class="title-img" src="img/title.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- .......... Slider Controls .......... -->
+                        <a class="slider__control" href="#" data-uk-slidenav-next data-uk-slideshow-item="next"></a>
+                        <!-- .......... End Slider Controls .......... -->
+                        <!-- .......... Slider Navigation .......... -->
+                        <ul class="js-slider-intro-nav uk-slideshow-nav uk-dotnav uk-flex-column uk-flex-center"></ul>
+                        <!-- .......... End Slider Navigation .......... -->
+                        <!-- .......... End Slider .......... -->
+                    </div>
+                    <div class="events events--intro uk-position-relative uk-visible@l">
+                        <div class="events__grid--intro uk-child-width-1-4 uk-grid-small" data-uk-grid>
+                            <div class="events__title__wrap">
+                                <h3 class="events__title uk-h3 c-dark--4">Upcoming events</h3>
+                            </div>
+                            <!-- .......... Latest Events .......... -->
+                            <div>
+                                <a href="#tour" data-uk-scroll="offset: 80">
+                                    <div class="events__block bg-dark--1 uk-grid-collapse" data-uk-grid>
+                                        <div class="events__date uk-width-auto">
+                                            <span class="events__day">21</span>
+                                            <span class="events__month">Oct</span>
+                                            <span class="events__year">2025</span>
+                                        </div>
+                                        <div class="events__location uk-width-expand">
+                                            <span class="events__place">Los Angeles</span>
+                                            <span class="events__club">California</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#tour" data-uk-scroll="offset: 80">
+                                    <div class="events__block bg-dark--2 uk-grid-collapse" data-uk-grid>
+                                        <div class="events__date uk-width-auto">
+                                            <span class="events__day">27</span>
+                                            <span class="events__month">Oct</span>
+                                            <span class="events__year">2025</span>
+                                        </div>
+                                        <div class="events__location uk-width-expand">
+                                            <span class="events__place">Dallas</span>
+                                            <span class="events__club">Texas</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#tour" data-uk-scroll="offset: 80">
+                                    <div class="events__block bg-dark--3 uk-grid-collapse" data-uk-grid>
+                                        <div class="events__date uk-width-auto">
+                                            <span class="events__day">02</span>
+                                            <span class="events__month">Nov</span>
+                                            <span class="events__year">2025</span>
+                                        </div>
+                                        <div class="events__location uk-width-expand">
+                                            <span class="events__place">Atlanta</span>
+                                            <span class="events__club">Georgia</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- .......... End Latest Events .......... -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- .......... End Intro Section .......... -->
+
+    <!-- .......... Volume Button Mask .......... -->
+    <svg class="tracks__volume_mask">
+        <defs>
+            <clipPath id="volumeClipMask">
+                <path d="M7 27.605H4v-7.5h3v7.5zm20 0h-3v-25h3v25zm-10 0h-3v-16.25h3v16.25zm-5.167 0h-3V15.876h3v11.729zm10 0h-3V7.126h3v20.479z" fill="#FFF"/>
+            </clipPath>
+        </defs>
+    </svg>
+    <!-- .......... End Volume Button Mask .......... -->
+
+    <!-- .......... Tour Section .......... -->
+    <section id="tour" class="events uk-section" data-uk-scrollspy="cls:uk-animation-fade; offset-top: 80px; delay: 300">
+        <div class="container--min uk-container">
+            <h2 class="uk-h2 uk-margin-bottom">Tour</h2>
+            <div class="events__table list--striped bg-dark--1">
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">13</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Vancouver BC</span>
+                        <span class="events__club">Rogers Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108157501919?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">15</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Seattle WA</span>
+                        <span class="events__club">WAMU Theatre</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108162085629?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">17</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Portland OR</span>
+                        <span class="events__club">Moda Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108163078599?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">19</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">San Francisco CA</span>
+                        <span class="events__club">Bill Graham Civic Auditorium</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108163319319?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">21</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Los Angeles CA</span>
+                        <span class="events__club">Crypto.com Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108167200929?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">23</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">San Diego CA</span>
+                        <span class="events__club">Viejas Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108167963209?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">25</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Phoenix AZ</span>
+                        <span class="events__club">Footprint Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108168745549?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">27</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Dallas TX</span>
+                        <span class="events__club">American Airlines Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108169688369?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">29</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Houston TX</span>
+                        <span class="events__club">Toyota Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108170039419?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">31</span>
+                        <span class="events__month">Oct</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Austin TX</span>
+                        <span class="events__club">Moody Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108170460679?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">02</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Atlanta GA</span>
+                        <span class="events__club">State Farm Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108170601099?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">04</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Miami FL</span>
+                        <span class="events__club">Kaseya Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108182396379?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">06</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Orlando FL</span>
+                        <span class="events__club">KIA Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108215334899?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">08</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Charlotte NC</span>
+                        <span class="events__club">Spectrum Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108182787549?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">10</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Fairfax VA</span>
+                        <span class="events__club">EagleBank Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108183108509?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">12</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Columbus OH</span>
+                        <span class="events__club">Nationwide Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108186980089?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">14</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Pittsburgh PA</span>
+                        <span class="events__club">PPG Paints Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108187100449?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">16</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Brooklyn NY</span>
+                        <span class="events__club">Barclays Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108187341169?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">18</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Boston MA</span>
+                        <span class="events__club">TD Garden</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108187591919?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">20</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Detroit MI</span>
+                        <span class="events__club">Little Caesars Arena</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108187862729?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">22</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">Chicago IL</span>
+                        <span class="events__club">United Center</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108188304049?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+                <!-- .......... Tour Item .......... -->
+                <div class="list__item">
+                    <div class="events__date uk-width-auto">
+                        <span class="events__day">24</span>
+                        <span class="events__month">Nov</span>
+                        <span class="events__year">2025</span>
+                    </div>
+                    <div class="events__location uk-width-expand">
+                        <span class="events__place">St. Louis MO</span>
+                        <span class="events__club">The Pageant</span>
+                    </div>
+                    <div class="events__booking uk-width-1-1 uk-width-1-3@s">
+                        <a href="https://www.eventbrite.com/e/1108192245839?aff=oddtdtcreator" class="btn">Book tickets</a>
+                    </div>
+                </div>
+                <!-- .......... End Tour Item .......... -->
+            </div>
+        </div>
+    </section>
+    <!-- .......... End Tour Section .......... -->
+    <!-- .......... Footer .......... -->
+    <footer class="footer bg-dark--1 uk-section uk-section-small">
+        <div class="container--min uk-container">
+            <div class="uk-flex uk-flex-between uk-child-width-auto" data-uk-grid>
+                <ul class="nav nav--footer js-scrollspy-nav uk-flex uk-flex-wrap">
+                    <li><a href="#about_us">About us</a></li>
+                    <li><a href="tour.html">Tour</a></li>
+                    <li><a href="#contacts">Contacts</a></li>
+                    <li><a href="merch.html">Merch</a></li>
+                </ul>
+            </div>
+            <p class="footer__copyrights">
+                &copy;Copyright 2024 PACA Stage Fright - All rights reserved by PACA.
+            </p>
+        </div>
+        <a href="#" class="footer__totop" data-uk-totop data-uk-scroll></a>
+    </footer>
+    <!-- .......... End Footer .......... -->
+
+
+    <!-- .......... Scripts .......... -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/uikit.min.js"></script>
+    <script src="js/mediaelement-and-player.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- .......... End Scripts .......... -->
+    
+</body>
+
+</html>
