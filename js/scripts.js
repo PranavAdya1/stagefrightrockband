@@ -1,4 +1,26 @@
+/* ----------------------------
 
+	Project:	Symphonius
+	Version:	1.1.0
+	Author:     Nika Vasilyeva
+	Website:    http://themeforest.net/user/the-nika/
+
+-------------------------------
+
+	Table of Contents:
+
+	01. Preloader
+	02. Add Class on Touch Devices
+	03. Top Panel Show/Hide
+	04. Navigation Scrollspy
+	05. Hide Offcanvas Navigation by Click to Link
+	06. Intro Title Modification
+	07. Audio Player
+	08. Video Player
+	09. Video and News Slider Controls Stick to Window Width
+	10. Form Validation
+
+---------------------------- */
 
 'use strict';
 
@@ -435,22 +457,22 @@ jQuery(document).ready(function($) {
 
 	---------------------------- */
 
-	function subForm(f){
+function subForm(f) {
     var $form = f,
         hasErrors = false,
         msg = {
             success: 'Your message was successfully sent!',
-            fail: 'Your message was successfully sent!',
-            empty: 'Please enter fields and try again',
-            error: 'Please enter required field(s)',
-            unknown: 'Unknown error'
+            fail: 'There was an error sending your message. Please try again later.',
+            empty: 'Please fill out all required fields.',
+            error: 'Please enter required field(s).',
+            unknown: 'Unknown error occurred.'
         },
         $respond = '';
 
     // Check for empty or required fields
-    $form.find('input:not([type="submit"]), textarea').each(function(index, el) {
+    $form.find('input:not([type="submit"]), textarea').each(function () {
         var field = $(this);
-        if (field.attr('data-require') !== undefined && field.attr('data-require') === 'true' && field.val() === '') {
+        if (field.attr('data-require') === 'true' && field.val() === '') {
             $respond = msg.error;
             field.addClass('js-field-error');
             hasErrors = true;
@@ -464,38 +486,59 @@ jQuery(document).ready(function($) {
             url: 'https://formspree.io/f/xanypply', // Replace with your Formspree endpoint
             method: 'POST',
             data: $form.serialize(),
-            success: function(response) {
-                // If Formspree returns success
-                $respond = msg.success;
-                $form.find('.js-respond').text($respond);
+            dataType: 'json', // Expect JSON response from Formspree
+            success: function (response) {
+                // Check for a success status in the response
+                if (response.ok) {
+                    // Show success message
+                    $respond = msg.success;
+                    $form.find('.js-respond').text($respond).addClass('success-message');
+
+                    // Clear the form fields
+                    $form[0].reset();
+                } else {
+                    // Handle unexpected response structure
+                    $respond = msg.fail;
+                    $form.find('.js-respond').text($respond).addClass('error-message');
+                }
             },
-            error: function(response) {
-                // Handle Formspree submission failure
+            error: function () {
+                // Show failure message
                 $respond = msg.fail;
-                $form.find('.js-respond').text($respond);
+                $form.find('.js-respond').text($respond).addClass('error-message');
             }
         });
     } else {
-        // Show error if there are missing fields
-        $form.find('.js-respond').text($respond);
+        // Show error message if there are missing required fields
+        $form.find('.js-respond').text($respond).addClass('error-message');
     }
 
     return false;
 }
 
-$('.js-form').submit(function(){
-    subForm($(this)); 
+// Form submission handler
+$('.js-form').submit(function () {
+    subForm($(this));
     return false;
 });
 
-$('.js-form').find('input:not([type="submit"]), textarea').bind('change paste keyup', function(){ 
+// Remove error class and response message on field change
+$('.js-form').find('input:not([type="submit"]), textarea').on('change paste keyup', function () {
     var field = $(this),
         respondBlock = field.parents('.js-form').find('.js-respond');
-    if ($(this).hasClass('js-field-error')) 
-        $(this).removeClass('js-field-error');
-    if (respondBlock.text() !== '')
-        respondBlock.text('');
+
+    // Remove error styling if the field is corrected
+    if (field.hasClass('js-field-error')) {
+        field.removeClass('js-field-error');
+    }
+
+    // Clear response message if there's any
+    if (respondBlock.text() !== '') {
+        respondBlock.text('').removeClass('error-message success-message');
+    }
 });
+
+
 
 
 });
