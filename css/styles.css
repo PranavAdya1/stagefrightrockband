@@ -36,6 +36,7 @@
 
 	01. Custom styles
 
+
 ---------------------------- */
 html, body {
   -webkit-box-sizing: border-box;
@@ -2189,6 +2190,18 @@ p {
 
 .js-field-error {
   border-bottom-color: #ff0042;
+}
+
+.success-message {
+    color: green;
+}
+
+.error-message {
+    color: red;
+}
+
+.js-field-error {
+    border: 1px solid red;
 }
 
 /* ----------------------------
