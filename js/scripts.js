@@ -155,182 +155,144 @@ jQuery(document).ready(function($) {
 		07. Audio Player
 
 	---------------------------- */
+// Start Work with Audio
+var audio_player = null,
+	track_index = 0,
+	current_audio = $('.js-audio'),
+	albums = $('.albums--list .albums__item'),
+	panel_play = $('.js-panel-play'),
+	audio_play = $('.js-audio-play'),
+	audio_volume = $('.js-audio-volume, .js-panel-volume');
 
-	// Start Work with Audio
-	var audio_player = null,
-		track_index = 0,
-		current_audio = $('.js-audio'),
-		albums = $('.albums--list .albums__item'),
-		panel_play = $('.js-panel-play'),
-		audio_play = $('.js-audio-play'),
-		audio_volume = $('.js-audio-volume, .js-panel-volume');
+// Scroll to Tracklist When Click Album
+UIkit.util.on('.playlist__wrap .uk-switcher', 'show', function() {
+	$('html, body').animate({
+		'scrollTop': $('.music').offset().top - ((wnd[0].innerWidth >= breakpoint.m) ? 80 : 20)
+	}, 500);
+});
 
-	// Scroll to Tracklist When Click Album
-	UIkit.util.on('.playlist__wrap .uk-switcher', 'show', function() {
-		$('html, body').animate({ 
-			'scrollTop': $('.music').offset().top - ((wnd[0].innerWidth >= breakpoint.m) ? 80 : 20) 
-		}, 500);
+// Set Audio Duration
+function getDuration(src, cb) {
+	var audio = new Audio();
+	audio.preload = 'metadata';
+	$(audio).on('loadedmetadata', function() {
+		cb(audio.duration);
 	});
+	audio.src = src;
+}
 
-	// Set Audio Duration
-	function getDuration(src, cb) {
-		var audio = new Audio();
-		audio.preload = 'metadata';
-		$(audio).on('loadedmetadata', function(){
-			cb(audio.duration);
-		});
-		audio.src = src;
-	}
-	function readableDuration(seconds) {
-		var sec = Math.floor( seconds ),
-			min = Math.floor( sec / 60 );
-		min = min >= 10 ? min : '0' + min;    
-		sec = Math.floor( sec % 60 );
-		sec = sec >= 10 ? sec : '0' + sec;    
-		return min + ':' + sec;
-	}
+function readableDuration(seconds) {
+	var sec = Math.floor(seconds),
+		min = Math.floor(sec / 60);
+	min = min >= 10 ? min : '0' + min;
+	sec = Math.floor(sec % 60);
+	sec = sec >= 10 ? sec : '0' + sec;
+	return min + ':' + sec;
+}
 
-	// Set First Track for Player
-	current_audio.attr('src', $('.js-audio-items .list__item').eq(0).data('audio') );
-	// Initialize MediaElement.js
-	current_audio.mediaelementplayer({
-		startVolume: 1,
-		features: [],
-		success: function(mediaElement, originalNode, instance) {
-			audio_player = mediaElement;
-			var showCurrentTime = null,
-				current = $('.list__item--active'),
-				currentSrc = current.data('audio');
-			// Audio Playing Event
-			mediaElement.addEventListener('playing', function() {
-				var cur_time = mediaElement.getCurrentTime();
-				if (cur_time < 1)
-					$('.list__item--active .js-audio-time').text( readableDuration( cur_time ) );
-				else
-					$('.list__item--active .js-audio-time').text( readableDuration( cur_time+1 ) );
-				showCurrentTime = setInterval(function(){
-					if (mediaElement.getCurrentTime() > mediaElement.duration)
-						clearInterval(showCurrentTime);
-					$('.list__item--active .js-audio-time').text( readableDuration( mediaElement.getCurrentTime()+1 ) );
-				}, 1000);
-				var index = $('.list__item--active').parents('.playlist').index();
-				albums.removeClass('albums--playing').eq(index).addClass('albums--playing');
-				setTimeout(function(){
-					albums.removeClass('albums--paused');
-					if (panel_play.hasClass('icon--play'))
-						panel_play.removeClass('icon--play').addClass('icon--pause');
-				}, 100);
-			}, true);
-			// Audio Pause Event
-			mediaElement.addEventListener('pause', function() {
-				clearInterval(showCurrentTime);
-				$('.albums--playing').addClass('albums--paused');
-				if (panel_play.hasClass('icon--pause'))
-					panel_play.removeClass('icon--pause').addClass('icon--play');
-			});
-			// Audio Ended Event
-			mediaElement.addEventListener('ended', function() {
-				var current = $('.list__item--active'),
-					next = current.next();
-				clearInterval(showCurrentTime);
-				current.find('.js-audio-play, .js-panel-play').removeClass('icon--pause').addClass('icon--play');
-				$('.list__item').removeClass('list__item--active');
-				albums.removeClass('albums--playing');
-				current.find('.js-audio-time').text('');
-				if (next.length != 0){
-					audio_player.setSrc(next.data('audio'));
-					audio_player.play();
-					next.addClass('list__item--active');
-					next.find('.js-audio-play').removeClass('icon--play').addClass('icon--pause');
-				}
-			}, true);
-		},
-		// Audio Loading Event
-		error: function() {
-			UIkit.modal.dialog('<p class="uk-modal-body c-dark">Error of audio file</p>');
-		}
-	});
-	if (audio_player) {
-		// Top Panel Play-Pause Control Settings
-		panel_play.on('click', function(e) {
-			e.preventDefault();
-			var btn = $(this);
-			if (audio_player.paused){
-				if ($('.list__item').hasClass('list__item--active')) {
-					$('.list__item--active .js-audio-play').removeClass('icon--play').addClass('icon--pause');
-				} else {
-					$('.list__item').eq(0).find('.js-audio-play').removeClass('icon--play').addClass('icon--pause');
-				}
-				btn.removeClass('icon--play').addClass('icon--pause');
-				$('.list__item--active .icon--play').removeClass('icon--play').addClass('icon--pause');
-				audio_player.play();
-				if (!$('.js-audio-items .list__item').hasClass('list__item--active'))
-					$('.js-audio-items .list__item').eq(0).addClass('list__item--active');
-			} else {
-				btn.removeClass('icon--pause').addClass('icon--play');
-				$('.js-audio-play.icon--pause').removeClass('icon--pause').addClass('icon--play');
-				audio_player.pause();
-			}
+// Set First Track for Player
+current_audio.attr('src', $('.js-audio-items .list__item').eq(0).data('audio'));
+// Initialize MediaElement.js
+current_audio.mediaelementplayer({
+	startVolume: 1,
+	features: [],
+	success: function(mediaElement, originalNode, instance) {
+		audio_player = mediaElement;
+		var showCurrentTime = null;
+
+		// Audio Playing Event
+		mediaElement.addEventListener('playing', function() {
+			showCurrentTime = setInterval(function() {
+				if (mediaElement.getCurrentTime() > mediaElement.duration)
+					clearInterval(showCurrentTime);
+			}, 1000);
+			if (panel_play.hasClass('icon--play'))
+				panel_play.removeClass('icon--play').addClass('icon--pause');
+		}, true);
+
+		// Audio Pause Event
+		mediaElement.addEventListener('pause', function() {
+			clearInterval(showCurrentTime);
+			if (panel_play.hasClass('icon--pause'))
+				panel_play.removeClass('icon--pause').addClass('icon--play');
 		});
-		// Audio Play-Pause Control Settings
-		audio_play.on('click', function(e) {
-			e.preventDefault();
-			var btn = $(this),
-				prev = $('.list__item--active'),
-				current = btn.parent('.list__item'),
-				currentSrc = current.data('audio');
-			$('.list__item').removeClass('list__item--active');
-			current.addClass('list__item--active');
-			if (audio_player.paused){
-				if (current_audio.attr('src') !== currentSrc){
-					prev.find('.js-audio-time').text('');
-					audio_player.setSrc(currentSrc);
-				}
-				btn.add(panel_play).removeClass('icon--play').addClass('icon--pause');
-				audio_player.play();			
-			} else {
-				$('.js-audio-play.icon--pause').add(panel_play).removeClass('icon--pause').addClass('icon--play');
-				audio_player.pause();
-				if (current_audio.attr('src') !== currentSrc) {
-					prev.find('.js-audio-time').text('');
-					audio_player.setSrc(currentSrc);
-					btn.add(panel_play).removeClass('icon--play').addClass('icon--pause');
-					audio_player.play();
-					$('.list__item--active').removeClass('list__item--active');
-					current.addClass('list__item--active');
-				}
-			}
-		});
-		// Top Panel Volume Control Settings
-		function setPanelVolume(e) {
-			var target_elem = $(e.target),
-				btn = target_elem.hasClass('mejs__horizontal-volume-total') ? target_elem : (target_elem.hasClass('mejs__horizontal-volume-slider') ? target_elem.find('.mejs__horizontal-volume-total') : target_elem.parents('.mejs__horizontal-volume-slider').find('.mejs__horizontal-volume-total')),
-				width = btn.width(),
-				offset = btn.offset(),
-				offsetX = (typeof e.pageX !== 'undefined') ? e.pageX - offset.left : 0,
-				volume = offsetX / width;
-			$('.mejs__horizontal-volume-current').css({
-				left: 0,
-				width: (volume * 100) + '%',
-			});
-			audio_player.setVolume(volume);
-		}
-		audio_volume
-			.on('mousedown', function(e) {
-				window.panelVolumeSlide = $(this).on('mousemove', { e: event }, setPanelVolume);
-			})
-			.on('mouseup', function() {
-				if (typeof panelVolumeSlide !== 'undefined')
-					panelVolumeSlide.off('mousemove');
-			})
-			.on('mouseleave', function() {
-				if (typeof panelVolumeSlide !== 'undefined')
-					panelVolumeSlide.off('mousemove');
-			})
-			.on('click', { e: event }, setPanelVolume);
-	} else {
+
+		// Audio Ended Event
+		mediaElement.addEventListener('ended', function() {
+			clearInterval(showCurrentTime);
+			panel_play.removeClass('icon--pause').addClass('icon--play');
+		}, true);
+	},
+
+	// Audio Loading Event
+	error: function() {
 		UIkit.modal.dialog('<p class="uk-modal-body c-dark">Error of audio file</p>');
 	}
+});
+
+if (audio_player) {
+	// Top Panel Play-Pause Control Settings
+	panel_play.on('click', function(e) {
+		e.preventDefault();
+		var btn = $(this);
+		if (audio_player.paused) {
+			btn.removeClass('icon--play').addClass('icon--pause');
+			audio_player.play();
+		} else {
+			btn.removeClass('icon--pause').addClass('icon--play');
+			audio_player.pause();
+		}
+	});
+
+	// Audio Play-Pause Control Settings
+	audio_play.on('click', function(e) {
+		e.preventDefault();
+		var btn = $(this),
+			current = btn.parent('.list__item'),
+			currentSrc = current.data('audio');
+		if (audio_player.paused) {
+			if (current_audio.attr('src') !== currentSrc) {
+				audio_player.setSrc(currentSrc);
+			}
+			btn.add(panel_play).removeClass('icon--play').addClass('icon--pause');
+			audio_player.play();
+		} else {
+			btn.add(panel_play).removeClass('icon--pause').addClass('icon--play');
+			audio_player.pause();
+		}
+	});
+
+	// Top Panel Volume Control Settings
+	function setPanelVolume(e) {
+		var target_elem = $(e.target),
+			btn = target_elem.hasClass('mejs__horizontal-volume-total') ? target_elem : (target_elem.hasClass('mejs__horizontal-volume-slider') ? target_elem.find('.mejs__horizontal-volume-total') : target_elem.parents('.mejs__horizontal-volume-slider').find('.mejs__horizontal-volume-total')),
+			width = btn.width(),
+			offset = btn.offset(),
+			offsetX = (typeof e.pageX !== 'undefined') ? e.pageX - offset.left : 0,
+			volume = offsetX / width;
+		$('.mejs__horizontal-volume-current').css({
+			left: 0,
+			width: (volume * 100) + '%',
+		});
+		audio_player.setVolume(volume);
+	}
+	audio_volume
+		.on('mousedown', function(e) {
+			window.panelVolumeSlide = $(this).on('mousemove', { e: event }, setPanelVolume);
+		})
+		.on('mouseup', function() {
+			if (typeof panelVolumeSlide !== 'undefined')
+				panelVolumeSlide.off('mousemove');
+		})
+		.on('mouseleave', function() {
+			if (typeof panelVolumeSlide !== 'undefined')
+				panelVolumeSlide.off('mousemove');
+		})
+		.on('click', { e: event }, setPanelVolume);
+} else {
+	UIkit.modal.dialog('<p class="uk-modal-body c-dark">Error of audio file</p>');
+}
+
 
 
 	/* ----------------------------
