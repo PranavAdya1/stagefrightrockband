@@ -74,14 +74,48 @@
                 <div class="uk-width-1-3 uk-width-1-6@m">
                     <!-- .......... Player Controls .......... -->
                     <div class="panel__player">
-                        <audio class="js-audio" preload="metadata"></audio>
-                        <button type="button" class="icon icon--play-pause icon--play js-panel-play"></button>
-                        <a class="mejs__horizontal-volume-slider js-panel-volume">
-                            <div class="mejs__horizontal-volume-total">
-                                <div class="mejs__horizontal-volume-current"></div>
-                            </div>
-                        </a>
-                    </div>                    
+	<audio class="js-audio" preload="metadata" src="spooky.mp3"></audio>
+	<button type="button" class="icon icon--play-pause icon--play js-panel-play"></button>
+	<a class="mejs__horizontal-volume-slider js-panel-volume">
+		<div class="mejs__horizontal-volume-total">
+			<div class="mejs__horizontal-volume-current"></div>
+		</div>
+	</a>
+</div>
+
+<script>
+$(document).ready(function() {
+	var audio_player = null,
+		current_audio = $('.js-audio'),
+		panel_play = $('.js-panel-play');
+	
+	// Initialize MediaElement.js when document is ready
+	current_audio.mediaelementplayer({
+		startVolume: 1,
+		features: [],
+		success: function(mediaElement, originalNode, instance) {
+			audio_player = mediaElement;
+
+			// Play-pause button control
+			panel_play.on('click', function(e) {
+				e.preventDefault();
+				var btn = $(this);
+				
+				if (audio_player.paused) {
+					btn.removeClass('icon--play').addClass('icon--pause');
+					audio_player.play();
+				} else {
+					btn.removeClass('icon--pause').addClass('icon--play');
+					audio_player.pause();
+				}
+			});
+		},
+		error: function() {
+			UIkit.modal.dialog('<p class="uk-modal-body c-dark">Error of audio file</p>');
+		}
+	});
+});
+</script>                   
                     <!-- .......... End Player Controls .......... -->
                 </div>
                 <div class="uk-width-1-3 uk-hidden@m uk-text-right">
@@ -340,7 +374,7 @@
                         <div class="contacts__form uk-card-body">
                             <h3 class="uk-h3">Get in touch</h3>
                             <!-- .......... Feedback Form .......... -->
-                            <form action="https://formspree.io/f/xanypply" method="POST" class="js-form" data-uk-grid>
+<form action="https://formspree.io/f/xanypply" method="POST" class="js-form" data-uk-grid>
     <div class="uk-width-1-1">
         <label>
             <input name="Name" class="uk-input" type="text" placeholder="Name">
@@ -381,9 +415,10 @@
                     <li><a href="tour.html">Tour</a></li>
                     <li><a href="merch.html">Merch</a></li>
                 </ul>
-                <p>Chapter: 1182 | Centennial High School Frisco</p>
+                <p>Chapter: 1182 | Centennial High School</p>
             </div>
             <div class="social social--footer">
+                
             </div>
             <p class="footer__copyrights">
                 &copy;Copyright 2024 PACA Stage Fright - All rights reserved by PACA.
